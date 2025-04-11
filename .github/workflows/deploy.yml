@@ -1,0 +1,33 @@
+name: Deploy and Notify New Relic
+
+on:
+   push:
+     branches:
+       - main
+
+jobs:
+   deploy:
+     runs-on: ubuntu-latest
+
+     steps:
+     - name: Checkout Code
+       uses: actions/checkout@v3
+
+     - name: Deploy your app
+       run: echo "Pretend this is a deployment step"
+
+     - name: Notify New Relic of Deployment
+       run: |
+          curl -X POST https://insights-collector.newrelic.com/v1/accounts/${{ secrets.NEW_RELIC_ACCOUNT_ID }}/events \
+          -H "Content-Type: application/json" \
+          -H "X-Insert-Key: ${{ secrets.NEW_RELIC_INSERT_KEY }}" \
+          -d '{
+            "eventType": "Deployment",
+            "appName": "my-github-app",
+            "commitHash": "'${{ github.sha }}'",
+            "branch": "'${{ github.ref_name }}'",
+            "pipelineId": "'${{ github.run_id }}'",
+            "deployedBy": "'${{ github.actor }}'",
+            "deploymentStatus": "success",
+            "timestamp": '$(($(date +%s%N)/1000000))'
+             }'
