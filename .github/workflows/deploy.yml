@@ -1,4 +1,4 @@
-name: Deploy and Notify New Relic
+u01name: Deploy and Notify New Relic
 
 on:
    push:
@@ -18,7 +18,7 @@ jobs:
 
      - name: Notify New Relic of Deployment
        run: |
-          curl -X POST https://insights-collector.newrelic.com/v1/accounts/${{ secrets.NEW_RELIC_ACCOUNT_ID }}/events \
+          curl -X POST https://insights-collector.eu01.nr-data.net/v1/accounts/${{ secrets.NEW_RELIC_ACCOUNT_ID }}/events \
           -H "Content-Type: application/json" \
           -H "X-Insert-Key: ${{ secrets.NEW_RELIC_INSERT_KEY }}" \
           -d '{
