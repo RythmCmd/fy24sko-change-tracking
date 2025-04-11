@@ -20,7 +20,7 @@ jobs:
        run: |
           curl -X POST https://insights-collector.eu01.nr-data.net/v1/accounts/3225207/events \
           -H "Content-Type: application/json" \
-          -H "X-Insert-Key: ${{ secrets.NEW_RELIC_INSERT_KEY }}" \
+          -H "X-Insert-Key: ${{ secrets.NR_LICENSE_KEY}}" \
           -d '{
             "eventType": "Deployment",
             "appName": "my-github-app",
