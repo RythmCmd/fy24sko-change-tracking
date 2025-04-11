@@ -1,4 +1,4 @@
-u01name: Deploy and Notify New Relic
+name: Deploy and Notify New Relic
 
 on:
    push:
